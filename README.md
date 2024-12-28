@@ -107,3 +107,52 @@ Authorization: Bearer <your_jwt_token>
 ```
 ## Testing the API
 You can test the API using Postman or Swagger UI. Make sure to include your JWT token in the header for authenticated endpoints.
+
+
+## API Documentation with Swagger
+Swagger is a great tool to automatically generate documentation for your API based on your views and serializers. Django REST Framework (DRF) has integration with Swagger via the drf-yasg package.
+
+1.1 Install drf-yasg for Swagger UI
+First, install drf-yasg to generate the Swagger UI for your project.
+```bash
+pip install drf-yasg
+```
+1.2 Update urls.py to include Swagger Documentation
+In your Django project, update your urls.py to include the Swagger view:
+```py
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from .views import UserProfileViewSet, ProjectViewSet, ProjectMemberViewSet, TaskViewSet, CommentViewSet
+
+# Setting up Swagger Documentation
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Project Management API",
+      default_version='v1',
+      description="API for managing users, projects, tasks, and comments",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@projectmanagement.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+)
+
+# Default router for API endpoints
+router = DefaultRouter()
+router.register(r'users', UserProfileViewSet)
+router.register(r'projects', ProjectViewSet)
+router.register(r'project_members', ProjectMemberViewSet)
+router.register(r'tasks', TaskViewSet)
+router.register(r'comments', CommentViewSet)
+
+urlpatterns = [
+    path('api/', include(router.urls)),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # Swagger UI endpoint
+]
+```
+This will provide a Swagger UI at the endpoint http://localhost:8000/swagger/ where users can interact with your API and view the documentation.
+
+1.3 Example Swagger UI Output
+Once you run the server and visit http://localhost:8000/swagger/, you’ll see a beautifully generated, interactive documentation interface. The API consumers can see all available endpoints, send test requests, and view the responses.
