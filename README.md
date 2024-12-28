@@ -21,20 +21,15 @@ This is a project management API built using Django and Django REST Framework (D
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/project-management-api.git
-cd project-management-api
-```
-2. Install the required dependencies:
-
-```bash
-pip install -r requirements.txt
+git clone https://github.com/SarankumarJ/TechForing_Project_Submission.git
+cd TechForing_Project
 ```
 
-3. Set up the database:
+2. Set up the database:
 Make sure you have a working database (PostgreSQL, SQLite, etc.)
 Update the DATABASES configuration in settings.py as per your database setup.
 
-4. Run migrations to create the necessary database tables:
+3. Run migrations to create the necessary database tables:
 ```bash
 python manage.py migrate
 ```
@@ -54,29 +49,53 @@ python manage.py runserver
 
 ## API Endpoints
 ### Users:
+
 POST /api/users/register/ - Register a new user
+
 POST /api/users/login/ - Login a user and get JWT tokens
+
 GET /api/users/{id}/ - Retrieve user details
+
 PUT/PATCH /api/users/{id}/ - Update user details
+
 DELETE /api/users/{id}/ - Delete a user account
+
 ### Projects:
+
 GET /api/projects/ - List all projects
+
 POST /api/projects/ - Create a new project
+
 GET /api/projects/{id}/ - Retrieve project details
+
 PUT/PATCH /api/projects/{id}/ - Update project details
+
 DELETE /api/projects/{id}/ - Delete a project
+
 ### Tasks:
+
 GET /api/projects/{project_id}/tasks/ - List tasks in a project
+
 POST /api/projects/{project_id}/tasks/ - Create a new task in a project
+
 GET /api/tasks/{id}/ - Retrieve task details
+
 PUT/PATCH /api/tasks/{id}/ - Update task details
+
 DELETE /api/tasks/{id}/ - Delete a task
+
 ### Comments:
+
 GET /api/tasks/{task_id}/comments/ - List comments on a task
+
 POST /api/tasks/{task_id}/comments/ - Create a new comment on a task
+
 GET /api/comments/{id}/ - Retrieve comment details
+
 PUT/PATCH /api/comments/{id}/ - Update comment details
+
 DELETE /api/comments/{id}/ - Delete a comment
+
 
 ## Authentication
 This API uses JWT for authentication. To login, send a POST request to /api/users/login/ with the user's credentials. You will receive an access token and a refresh token.
